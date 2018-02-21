@@ -1,0 +1,46 @@
+.row
+  .col-md-6.col-md-push-3
+    h1 It's Too Damn Cold!
+
+.row
+  .col-md-6.col-md-push-3
+    = form_tag '/', method: :get do
+      .form-group
+        = label_tag "What are you located? (zip code, city/state)"
+        = text_field_tag 'origin', params[:origin], class: 'form-control'
+      .form-group
+        = label_tag "I need it to be at least this warm:"
+        br
+        = select_tag "temperature", options_for_select((1..100).to_a, params[:temperature] || 32)
+        |  °F
+      .actions
+        = submit_tag 'Search', class: 'btn btn-primary'
+
+- if @results
+  .row
+    .col-md-8.col-md-push-2
+      h2 Results
+
+      - if @results.empty?
+        p Oh no! No warmer cities found within 500 miles.
+      - else
+        table.table
+          thead
+            tr
+              th City
+              th State
+              th Current Temperature
+              th Miles Away
+              th
+          tbody
+            - @results.each do |result|
+              tr
+                td= result.name
+                td= result.state
+                td
+                  = result.temperature
+                  | °F
+                td
+                  = result.distance_from(params[:origin]).round
+                  | mi
+                td= link_to "Directions", "https://www.google.com/maps/dir/?api=1&origin=#{params[:origin]}&destination=#{result.coordinates}"
