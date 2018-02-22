@@ -41,6 +41,6 @@
                   = result.temperature
                   | °F
                 td
-                  = result.distance_from(params[:origin]).round
+                  = result.distance_from(params[:origin]).round rescue "?"
                   | mi
                 td= link_to "Directions", "https://www.google.com/maps/dir/?api=1&origin=#{params[:origin]}&destination=#{result.coordinates}"
