@@ -19,6 +19,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'httparty'
 gem 'geocoder'
 gem "bugsnag"
+gem 'redis'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
