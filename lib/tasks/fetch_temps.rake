@@ -1,9 +1,8 @@
 task :fetch_temps => :environment do
 
-  cities = City.where(temperature: nil)
-  count = cities.count
+  count = City.count
 
-  cities.each_with_index do |city, i|
+  City.all.each_with_index do |city, i|
     begin
       FetchCurrentTemp.new.perform(city)
 
