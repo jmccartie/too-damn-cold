@@ -24,23 +24,24 @@
       - if @results.empty?
         p Oh no! No warmer cities found within 500 miles.
       - else
-        table.table
-          thead
-            tr
-              th City
-              th State
-              th Current Temperature
-              th Miles Away
-              th
-          tbody
-            - @results.each do |result|
+        .table-responsive
+          table.table
+            thead
               tr
-                td= result.name
-                td= result.state
-                td
-                  = result.temperature
-                  | °F
-                td
-                  = result.distance_from(params[:origin]).round rescue "?"
-                  | mi
-                td= link_to "Directions", "https://www.google.com/maps/dir/?api=1&origin=#{params[:origin]}&destination=#{result.coordinates}"
+                th City
+                th State
+                th Current Temperature
+                th Miles Away
+                th
+            tbody
+              - @results.each do |result|
+                tr
+                  td= result.name
+                  td= result.state
+                  td
+                    = result.temperature
+                    | °F
+                  td
+                    = result.distance_from(params[:origin]).round rescue "?"
+                    | mi
+                  td= link_to "Directions", "https://www.google.com/maps/dir/?api=1&origin=#{params[:origin]}&destination=#{result.coordinates}"
